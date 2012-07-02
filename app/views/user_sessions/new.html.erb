@@ -1,0 +1,15 @@
+<h1>Logowanie</h1>
+<%= form_for @user_session, :url => user_session_path do |f| %>
+<p>
+  Login<br />
+  <%= f.text_field :login %>
+</p>
+
+<p>
+  Hasło <br />
+  <%= f.password_field :password %>
+</p>
+
+<p><%= f.submit "Zaloguj" %></p>
+
+<% end %>

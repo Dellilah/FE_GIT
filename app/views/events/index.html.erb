@@ -1,0 +1,85 @@
+<h1>Lista wydarzeń </h1>
+AKTUALNE: 
+<%= link_to "Nadchodzące", root_url(:order => "upcoming")%> | 
+<%= link_to "Ostatnio dodane", root_url(:order => "the_latest")%> | 
+<%= link_to "Najpopularniejsze", root_url(:order => "popular") %> </br>
+ARCHIWALNE - zakończone
+<%= link_to "Ostatnio zakończone", root_url(:order => "finished") %></br>
+WSZYSTKIE, wg daty zakończenia
+<%= link_to "Wszystkie", root_url(:order => "all") %> </br>
+POLECANE DLA CIEBIE
+<%= link_to "Polecane", recommended_events_path %> 
+<h2> <%= @order %> </h2>
+
+<div id="tatabela">
+<% @events.each do |event| %>  	
+<table>
+
+	
+  <tr>
+    <th>Nazwa wydarzenia</th>
+    <th>Opis</th>
+    <th>Miejsce</th>
+    <th>Stan potwierdzenia
+    	przez administratora
+    </th>
+    <th>Od kiedy</th>
+    <th>Do kiedy</th>
+  </tr>
+
+  <tr>
+    <td><%= link_to event.name, event %></td>
+    <td><%= event.description[0..30] + '...' %></td>
+    <td><%= event.city %> <%= event.street %> <%= event.building_number %><%= event.door_number %></td>
+    <td><% if event.confirmation %>
+		  	TAK
+		 <% else %>
+		  	NIE, zgłoszone do potwierdzenia
+		 <% end %></td>
+    <td><%= event.start_date.strftime("%d-%m-%Y %H:%M ") %></td>
+	<td><%= event.stop_date.strftime("%d-%m-%Y") %></td>
+   </tr>
+   
+   <tr>
+  
+    <th colspan="3">Kategoria</th>
+    <th colspan="3">Tagi</th>
+    
+  </tr>
+  <tr>
+
+    <td colspan="3"><%= link_to event.category.name, event.category %></td>
+    <td colspan="3"><% event.tags.each do |tag| %>
+  			<%= link_to tag.name, tag %>
+  		<% end %>
+  	</td>
+  </tr>
+  <tr> <th colspan ="6">	
+  <br />
+  </th></tr>
+  <tr>
+    <td colspan="3"><% if @current_user && event.users.where(:id => @current_user.id).count == 1 %>
+			<%= link_to 'Wypisz sie z wydarzenia', unsubscribe_event_path(event)%> 
+		<% else %>
+			<%= link_to 'Zapisz sie na wydarzenie', subscribe_event_path(event) %> 
+		<% end %>
+	</td>
+	<td colspan="3"><%= link_to 'Dodaj komentarz', addcomment_form_comment_path(event)%>
+	</tr>
+	
+    <% if @current_user && @current_user.admin %>
+	<tr><td><%= link_to 'Otaguj wydarzenie', addtags_form_tag_path(event)%></td>
+    	<td><%= link_to 'Edytuj', edit_event_path(event) %></td>
+    	<td><%= link_to 'Usuń', event, confirm: 'Jesteś pewien?', method: :delete %></td></tr>
+    <% end %>
+  
+
+</table>
+<br />
+<% end %>
+</div>
+
+<br />
+
+<%= link_to 'Dodaj nowe wydarzenie', new_event_path %>
+<%= gmaps4rails(@json) %>

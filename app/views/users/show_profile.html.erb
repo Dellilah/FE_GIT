@@ -1,0 +1,48 @@
+<h1> Profil Uzytkownika 
+	<%= @user.login %> </h1>
+<div id="user_avatar">
+	<% if @visibility.avatar_url %>
+		<% if @user.avatar_url.thumb.url %>
+			<%= image_tag(@user.avatar_url.thumb.url) %>
+		<%else%>
+			Brak Avatara
+		<% end %>
+	<%else%>	
+		Zablokowany widok
+	<% end %>
+</div>
+<% if @current_user == @user %>	
+	<%= link_to 'Edytuj', edit_user_path(@user) %> | <%= link_to 'Edytuj widocznosc', changevisibility_form_visibility_path(@user) %>
+<% end %>
+<div>LOGIN
+	<%= @user.login %>
+</div>
+
+<div>IMIĘ
+	<%= @visibility.name ? @user.name : "Zablokowano" %>
+</div>
+<div>NAZWISKO
+	<%= @visibility.surname ? @user.surname : "Zablokowano" %>
+</div>
+<div>E-MAIL
+	<%= @visibility.email ? @user.email : "Zablokowano" %>
+</div>
+<div> WYDARZENIA W KTÓRYCH UCZESTNICZY
+	<% if @visibility.events %>
+	<ul>
+	<% @user_events = @user.events.find(:all, :conditions => ["stop_date >= date('now')"]) %>
+	<% @user_events.each do |event| %>
+		<li> <%= link_to event.name, event %> </li> <% if event.reminded %> <b> Już nie długo!</b> <% end %>
+	<% end %>
+	</ul>
+      WYDARZENIA W KTÓRYCH UCZESTNICZYŁ
+      <ul>
+	<% @user_events = @user.events.find(:all, :conditions => ["stop_date < date('now')"]) %>
+	<% @user_events.each do |event| %>
+		<li> <%= link_to event.name, event %> </li>
+	<% end %>
+	</ul>
+	<% else %>
+	Zablokowane 
+	<%end%>
+</div>

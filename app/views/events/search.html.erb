@@ -1,0 +1,49 @@
+<p> Wyniki wyszukiwania wydarzeń dla słów kluczowych </br> <b> <%= @keys_string %> </b> </p>
+
+
+
+<div> Wyszukiwanie po nazwie 
+<% if @events_by_name.empty? %>
+	<p> Brak wynikow </p>
+<% else %>
+	<ul>
+	<% @events_by_name.each do |event| %>
+		<li><%= link_to event.name, event %></li>
+	<%end%>
+	</ul>	
+<%end%>
+
+<div> Wyszukiwanie po kategoriach 
+<% if @events_by_category.empty? %>
+	<p> Brak wynikow </p>
+<% else %>
+	<ul>
+	<% @events_by_category.each do |event| %>
+		<li><%= link_to event.name, event %></li>
+	<%end%>
+	</ul>	
+<%end%>
+
+</div>
+<div> Wyszukiwanie po tagach 
+<% if @events_by_tag.empty? %>
+	<p> Brak wynikow </p>
+<% else %>
+	<ul>
+	<% @events_by_tag.each do |event| %>
+		<li><%= link_to event.name, event %> </li>
+	<%end%>
+	</ul>
+<% end %>
+
+<div> Wyszukiwanie po opisie 
+<% if @events_by_description.empty? %>
+	<p> Brak wynikow </p>
+<% else %>
+	<ul>
+	<% @events_by_description.each do |event| %>
+		<li><%= link_to event.name, event %></li>
+	<%end%>
+	</ul>	
+<%end%>
+</div>

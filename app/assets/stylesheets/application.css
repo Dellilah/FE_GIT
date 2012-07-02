@@ -1,0 +1,97 @@
+body{
+  font-family: Arial;
+  background: #4169E1;
+}
+
+#content a{
+	text-decoration: none;
+}
+
+#content a:hover {
+	color: #000000;
+}
+
+#wrap {
+	width:1200px;
+	position: relative;
+	margin:auto;
+}
+
+#bg {
+	background: white;
+	position:relative;
+	top: 10px;
+	height:90px;
+}
+
+#logo{
+	position: relative;
+	width: 186px;
+	height: 60px;
+	margin-top:10px;
+	margin-left:10px;
+	padding-top:10px;
+}
+
+#up_nav{
+	position: relative;
+	margin-left: auto;
+	margin-right: 10px;
+	text-align: right;	
+}
+
+#tatabela table{
+		position: relative;
+		margin:auto;
+		background: #b3b3b3;
+		width: 1100px;
+}
+
+#tatabela th {
+	text-align:center;
+	background: #b3b3b3;
+	padding:3px;
+}
+
+#tatabela td {
+	text-align:center;
+	background: #cccccc;
+	padding:3px;
+}
+
+div#nav{
+  background: #6495ED;
+}
+
+#nav{
+  font-size: 12pt;
+  padding: 0.75em;
+  color: white;
+  font-weight: bold;
+  padding-left: 10px;
+  padding-right: 10px;
+}
+
+#nav a, #nav a:visited{
+  color: white;
+  text-decoration: none;
+}
+
+div#content{
+
+  background: white;
+  border-style: ridge;
+  border-color: #4169E1;
+  width: 98%
+  height: 300px;
+}
+
+#content{
+  padding: 10px;
+}
+
+
+
+#stopka{
+
+}

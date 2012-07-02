@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta content="text/html; charset=UTF-8" http-equiv="Content-Type" />
+  </head>
+  <body>
+    <h1>Witaj adminie FreeEvents, <%= @user.login %></h1>
+    <p>
+      Do bazy danych dodane zostało wydarzenie, które wymaga Twojego potwierdzenia.:<br/>
+      <b><i><%= @event.name %></i><br/>
+      <%= @event.description%></b><br/>
+      Przejdź do strony wydarzenia aby je potwierdzić <%= @event_url %><br/>
+      Lub potwierdź je od razu <%= @event_url_confirmation %>
+    </p>
+  </body>
+</html>
+

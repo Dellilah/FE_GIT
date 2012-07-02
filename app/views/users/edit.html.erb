@@ -1,0 +1,43 @@
+<h1>Edycja konta użytkownika</h1>
+  <%= form_for @user do |f| %>
+
+    <p>
+      E-mail<br />
+      <%= f.text_field :email%> <br />
+    </p>
+    
+    <p>
+      Imię<br />
+      <%= f.text_field :name %> <br />
+    </p>
+
+    <p>
+      Nazwisko <br />
+      <%= f.text_field :surname%> <br />
+    </p>
+
+    <p>
+      Hasło <br />
+      <%= f.password_field :password %> <br />
+    </p>
+
+    <p>
+      Hasło ponownie<br />
+      <%= f.password_field :password_confirmation %> <br />
+    </p>
+
+
+	<p>
+		<%= f.label :avatar_url %> <br />
+		<%= f.file_field :avatar_url %>
+	</p>
+
+	<p>
+		<label>
+			<%= f.check_box :remove_avatar_url %>
+			Remove avatar
+		</label>
+	</p>
+    <p><%= f.submit "Zapisz zmiany w profilu" %></p>
+<% end %>
+

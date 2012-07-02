@@ -1,0 +1,27 @@
+<h1>Kategorie wydarzeń</h1>
+
+<table>
+  <tr>
+    <th>Nazwa kategorii</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @categories.each do |category| %>
+  <tr>
+    <td><%= category.name %></td>
+    <td><%= link_to 'Wydarzenia kategorii', category %></td>
+   <% if @current_user && @current_user.admin %>
+    <td><%= link_to 'Edytuj', edit_category_path(category) %></td>
+  <% end %>
+   <% if @current_user && @current_user.admin %>
+      <td><%= link_to 'Usuń', category, confirm: 'Czy na pewno chcesz usunąc?', method: :delete %></td>
+    <% end %>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'Dodaj nowa kategorię', new_category_path %>

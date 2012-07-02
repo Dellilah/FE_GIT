@@ -1,0 +1,17 @@
+<h1> Zarejestrowani użytkownicy </h1>
+
+<% users = @users %>
+
+<% if users.empty? %>
+  <p> Brak zarejestrowanych użytkowników </p>
+<% else %>
+  <table><tr> <th> LOGIN </th> <th> DOŁĄCZYŁ/-ŁA </th></tr>
+  <% users.each do |user| %>
+      <tr>
+        <td> <%= link_to user.login, show_profile_user_path(user) %> </td><td> <%= user.created_at.strftime("%d-%m-%Y") %> </td>
+      </tr %>
+    <% end %>
+    </table>
+<% end %>
+
+

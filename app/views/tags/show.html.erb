@@ -1,0 +1,26 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Nazwa tagu</b>
+  <%= @tag.name %>
+</p>
+
+<p>
+  <b>Wydarzenia które opisuje</b></br>
+  <% events=@tag.events.all %>
+  <% if events.count > 0 %>
+  	<ul>
+  		  <% events.each do |event| %>
+  	 	 <li> <%= link_to event.name , event %> <% if @current_user && @current_user.events.include?(event) %> - Jestes zapisany na to wydarzenie<% end %></li>
+  	  	 </br>
+  	  <% end %>
+  	 </ul>
+  <% else %>
+    Brak wydarzeń
+  <% end %>
+</p>
+
+<% if @current_user && @current_user.admin %>
+  <%= link_to 'Edytuj', edit_tag_path(@tag) %> |
+<%end%>
+<%= link_to 'Wróć', tags_path %>

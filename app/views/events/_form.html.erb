@@ -1,0 +1,41 @@
+<%= form_for(@event) do |f| %>
+  <% if @event.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@event.errors.count, "error") %> Nie zapisano wydarzenia</h2>
+
+      <ul>
+      <% @event.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    Nazwa Wydarzenia<br />
+    <%= f.text_field :name %>
+  </div>
+  <div class="field">
+    Opis<br />
+    <%= f.text_area :description %>
+  </div>
+  <div class="field">
+  	Adres <br />
+    Miasto <%= f.text_field :city %>Ulica<%= f.text_field :street %>Numer budynku <%= f.text_field :building_number %> Numer lokalu<%= f.text_field :door_number %>
+  </div>
+  <div class="field">
+    Kiedy, od kiedy:<br />
+    <%= f.datetime_select :start_date %>
+  </div>
+  <div class="field">
+  Do kiedy<br />
+    <%= f.date_select :stop_date %>
+  </div>
+  <div class="field">
+   Określ kategorię<br />
+    <%= f.select :category_id, @categories %>
+  </div>
+  <div class="actions">
+    <%= f.submit "Zapisz"%>
+  </div>
+<% end %>

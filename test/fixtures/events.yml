@@ -1,0 +1,29 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  name: MyString
+  description: MyText
+  city: MyString
+  street: MyString
+  building_number: 
+  confirmation: false
+  door_number: 
+  stop_date: 2012-01-24
+  start_date: 2012-01-24
+  start_time: 2012-01-24 00:31:22
+  category: 
+  tag: 
+
+two:
+  name: MyString
+  description: MyText
+  city: MyString
+  street: MyString
+  building_number: 
+  confirmation: false
+  door_number: 
+  stop_date: 2012-01-24
+  start_date: 2012-01-24
+  start_time: 2012-01-24 00:31:22
+  category: 
+  tag: 

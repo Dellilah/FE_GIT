@@ -1,0 +1,13 @@
+<h2> Lista wydarzeń w czasie trwania <%= link_to @event.name, @event %></h2>
+
+to jest od <%= @event.start_date.strftime("%d-%m-%Y %H:%M ") %> do <%= @event.stop_date.strftime("%d-%m-%Y") %>
+<br/>
+<% if @events.count > 0 %>
+  <ul>
+    <% @events.each do |event| %>
+      <li> <%= link_to event.name, event %>  <%= event.start_date.strftime("%d-%m-%Y %H:%M ") %> <% if event.stop_date.strftime("%d-%m-%Y") > event.start_date.strftime("%d-%m-%Y") %> do <%= event.stop_date.strftime("%d-%m-%Y") %><%end%></li>
+    <% end %>
+  </ul>
+<% else %>
+  Brak innych wydarzeń w tym czasie
+<% end %>

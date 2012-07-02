@@ -1,0 +1,61 @@
+<h1>Lista wydarzeń polecanych</h1>
+
+<p> Na podstawie kategorii cieszących się Twoim zainteresowaniem</p>
+<div>
+	<table BORDER=1 CELLPADDING=3 CELLSPACING=1 
+    RULES=ROWS >
+		<tr>
+			<th> Polecane wydarzenia danej kategorii </th>
+			<th> Kategoria </th> 
+			<th> W ilu wydarzeniach tej kategorii <br>
+				uczestniczysz/uczestniczyłes(-łas) </th> 
+			
+		<% @tab_recommended_category_count_similar.each do |id| %>
+		<%if !id[2].empty? %>
+			<tr>
+				<td align=center> <% id[2].each do |event_similar| %> 
+			 			
+			 			<%= link_to event_similar.name, event_similar %><br/>
+			 		<% end %>
+		 		</td>
+			 	<td align=center> <%= id[0] %> </td> 
+			 	<td align=center> <%= id[1] %></td> 
+			 	
+		 	</tr>
+		<% end %>
+		<% end %>
+		 
+	</table>
+</div>
+
+<p> Na podstawie tagów wydarzeń cieszących się Twoim zainteresowaniem</p>
+<div>
+	<table BORDER=1 CELLPADDING=3 CELLSPACING=1 
+    RULES=ROWS >
+		<tr>
+			<th> Polecane wydarzenie </th> 
+			<th> Ile wspólnych </th> 
+			<th> Wspólne tagi</th>
+		<% @recommended_by_tags_id.each do |recommended| %>
+		<tr>
+		 	<td align=center> <%= link_to recommended[0].name, recommended[0] %> 
+		 		
+		 	</td> 
+		 	<td align=center> <%= recommended[1] %></td> 
+		 	<td align=center><% recommended[2].each do |tag|%>
+		 		<%= tag.name %><br/><% end %>
+		 		</td>
+		 </tr>
+		<% end %>
+		 
+	</table>
+</div>
+<p>Twoje dotychczasowe wydarzenia: </p>
+	<ul>
+	
+	<% @user_events.each do |event| %>
+		<li> <%= link_to event.name, event %> </li> <% if event.reminded %> <b> Już nie długo!</b> <% end %>
+	<% end %>
+	</ul>
+
+<div></div>

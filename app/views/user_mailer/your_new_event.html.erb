@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta content="text/html; charset=UTF-8" http-equiv="Content-Type" />
+  </head>
+  <body>
+    <h1>Witaj <%= @user.login %></h1>
+    <p>
+      Do bazy wydarzeń dodałes nowe wydarzenie:<br/>
+      <b><i><%= @event.name %></i><br/>
+      <%= @event.description%></b><br/>
+      Jesli jestes zainteresowany tym wydarzeniem odwiedź stronę <%= @url %> <br/>
+    </p>
+  </body>
+</html>
+

@@ -1,0 +1,102 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Wydarzenie</b>
+  <%= @event.name %>
+</p>
+
+<p>
+  <b>Kilka słów więcej...</b>
+  <%= @event.description %>
+</p>
+<div> GDZIE 
+<p>
+  <b>Miasto:</b>
+  <%= @event.city %>
+</p>
+
+<p>
+  <b>Ulica:</b>
+  <%= @event.street %> <%= @event.building_number ? @event.building_number : ' ' %>/ <%= @event.door_number ? @event.door_number : ' ' %>
+</p>
+
+
+<p>
+  <b>Czy wydarzenie jest potwierdzone przez administratora:</b>
+  <% if @event.confirmation %>
+  	TAK
+  <% else %>
+  	NIE, zgłoszone do potwierdzenia
+  <% end %>
+</p>
+
+<p>
+  <b>Kiedy? </b>
+  <%= @event.start_date.strftime("%d-%m-%Y %H:%M ") %>
+</p>
+
+<p>
+  <b>Do kiedy? </b>
+  <%= @event.stop_date.strftime("%d-%m-%Y") %>
+</p>
+
+<p>
+  <b>Kategoria:</b>
+  <%= @event.category.name %>
+</p>
+
+<p>
+  <b>Tagi wydarzenia:</b>
+  <% @event.tags.each do |tag| %>
+  	<div> <%= tag.name %></div>
+  <% end %>
+</p>
+
+<p>
+	<% comments = @event.comments.order('created_at DESC') %>
+	<% if comments.count > 0 %> 
+	<b> Komentarze użytkowników do wydarzenia </b> </br>
+	<div>
+	<% comments.each do |comment| %>
+	Autor: <b> <%= comment.user.login %> </b> Data: <%= comment.created_at.strftime("%H:%M %d-%m-%Y") %>
+	<div> <%= comment.content %> </div>
+	<%= comment.difference ? comment.difference : '' %><br/><% if @current_user == comment.user || (@current_user && @current_user.admin) %> <%= link_to 'Edytuj komentarz', edit_comment_path(comment) %>
+	  <%= link_to 'Usuń', remove_comment_path(comment), confirm: 'Jesteś pewien?'%><br/><% end %>
+	____________________________________</br>
+	<% end %>
+	</div>
+	<% else %>
+	<b> Brak komentarzy do tego wydarzenia </b>
+	<% end %>
+</p>
+<% if @event.users.count > 0 %>
+	Uzytkownicy zapisani na wydarzenie: </br>
+	<% @event.users.each do |user| %>
+	 <%= user.login %></br>
+	<% end %>
+<% else %>
+	Jeszcze nikt nie zapisal sie na to wydarzenie </br>
+<% end %>
+</p>	
+
+<% if @current_user %>
+	 <% if @current_user.admin %>
+		<%= link_to 'Edytuj wydarzenie', edit_event_path(@event) %> |
+		
+		<% if @event.confirmation %>
+			<%= link_to 'Cofnij potwierdzenie dla wydarzenia', admin_rollback_confirmation_event_path(@event) %> |
+		<% else %>
+			<%= link_to 'Potwierdz wydarzenie', admin_confirmation_event_path(@event) %> |
+		<% end %>
+		
+	<% end %>
+	<% if @event.users.where(:id => @current_user.id).count == 1 %>
+		<%= link_to 'Wypisz sie z wydarzenia', unsubscribe_event_path(@event)%> |
+	<% else %>
+		<%= link_to 'Zapisz sie na wydarzenie', subscribe_event_path(@event) %> |
+	<% end %>
+<% end %>
+
+<%= link_to 'Dodaj komentarz do wydarzenia', addcomment_form_comment_path(@event)%>
+<%= link_to 'Wróć do spisu wydarzeń', events_path %> 
+<%= link_to 'Inne wydarzenia w tym czasie', events_same_time_event_path(@event) %>

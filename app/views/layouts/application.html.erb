@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <%= yield :head %>
+  <title><%= @title %></title>
+  <%= stylesheet_link_tag    "application" %>
+<%= stylesheet_link_tag "gmaps4rails" %>
+  <%= javascript_include_tag "application" %>
+  <%= csrf_meta_tags %>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/> 
+</head>
+<body>
+  <div id="wrap">
+
+<div id="bg">
+  <div id="logo">
+  	<%= link_to image_tag("logo.png"), root_url%>
+  </div>
+  
+  <div id="up_nav">
+  		
+  	<% if @current_user then %>
+  		Witaj, <%= @current_user.login %>!  | 
+  		  			  <%= link_to_unless_current "Mój profil |", show_profile_path %>
+                      <%= link_to_unless_current "Edytuj dane  |  ", edit_profile_path %>
+		      <%= link_to 'Edytuj widoczność', changevisibility_form_visibility_path(@current_user) %> |
+                      <%= link_to_unless_current "Wyloguj  |  ", logout_path %>
+                    
+  	<% else %>
+  		Jestes niezalogowany  |  <%= link_to_unless_current "Zaloguj się  |  ", login_path %>
+				         <%= link_to_unless_current "Zarejestruj!  |  ", sign_up_path %> 
+                
+  	<% end %>   
+  </div>
+  
+</div>
+ 
+  <div id="nav">
+        <%= link_to "| Strona Główna - wydarzenia |  ", root_url %>
+  	<% if @current_user then %>
+  		
+		      <%= link_to_unless_current "Użytkownicy |", all_users_path %>
+  	
+  	<% end %>
+	<%= link_to " Tagi | ", tags_path %>
+	<%= link_to " Kategorie | ", categories_path %>
+  </div>
+  <div id="search">
+  	<%= form_tag :controller => "events", :action => "search" do %>
+  		<%= text_field_tag(:keys) %>
+  		<%= submit_tag("Wyszukaj wydarzenia") %>
+	<%end%>
+ </div>
+
+<% if flash[:notice] then %>
+    <p> <%= flash[:notice] %> </p>
+<% end %>
+
+<div id="content"> <%= yield %> </div>
+<%= yield :scripts %>
+<div id="stopka">Autorki: A.Cyganiewicz, W. Dalach.</div>
+
+</div>
+</body>
+</html>

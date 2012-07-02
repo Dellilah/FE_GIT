@@ -1,0 +1,22 @@
+<h1>Edytuj widocznosc elementów profilu</h1>
+<div>
+Obecnie:<br/>
+Imię : <%= @visibility.name ? "widoczne" : "niewidoczne" %> <br/>
+Nazwisko : <%= @visibility.surname ? "widoczne" : "niewidoczne" %> <br/>
+E-mail : <%= @visibility.email ? "widoczne" : "niewidoczne" %> <br/>
+Wydarzenia : <%= @visibility.events ? "widoczne" : "niewidoczne" %> <br/>
+Avatar : <%= @visibility.avatar_url ? "widoczne" : "niewidoczne" %> <br/>
+</div><br/>
+<div>
+Zmień
+<%= form_tag :controller => "visibilities", :action => "change_visibility" do %>
+Imię  <%= check_box_tag(:name) %><br/>
+Nawisko  <%= check_box_tag(:surname) %><br/>
+E-mail  <%= check_box_tag(:email) %><br/>
+Wydarzenia  <%= check_box_tag(:events) %><br/>
+Avatar <%= check_box_tag(:avatar_url) %><br/>
+  <%= hidden_field_tag(:user_id, @current_user.id) %>
+  <%= hidden_field_tag(:visibility_id, @visibility.id) %><br/>
+  <%= submit_tag("Zmień") %>
+<%end%>
+</div>

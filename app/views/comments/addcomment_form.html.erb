@@ -1,0 +1,18 @@
+<p>
+
+<table>
+   <tr><td> Nazwa Wydarzenia: </td><td> <%= @event.name %> </td></tr>
+   <tr><td> Opisr: </td><td> <%= @event.description %> </td></tr>
+</table>
+<table>
+  <% @event.comments.each do |comment| %>
+    <tr><td><%= comment.content %> </td></tr>
+  <% end %>
+</table>
+</p>
+<%= form_tag :controller => "comments", :action => "addcomment" do %>
+  <%= text_area_tag(:content) %>
+  <%= hidden_field_tag(:event_id, @event.id) %>
+  <%= hidden_field_tag(:user_id, @current_user.id) %>
+  <%= submit_tag("dodaj") %>
+<%end%>
